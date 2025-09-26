@@ -1,0 +1,190 @@
+import { useParams } from 'react-router-dom';
+import { ShoppingCart, Star } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { useCart, type Product } from '@/contexts/CartContext';
+import { useToast } from '@/hooks/use-toast';
+import { Footer } from '@/components/Footer';
+import sampleProductImage from '@/assets/sample-product.jpg';
+
+interface CategoryPageProps {
+  brand: 'anil' | 'amai';
+}
+
+const CategoryPage = ({ brand }: CategoryPageProps) => {
+  const { category } = useParams();
+  const { dispatch } = useCart();
+  const { toast } = useToast();
+
+  const brandConfig = {
+    anil: {
+      name: 'Anil',
+      color: 'anil-primary',
+      gradient: 'from-anil-primary/10 to-purple-500/10'
+    },
+    amai: {
+      name: 'Amai',
+      color: 'amai-primary',
+      gradient: 'from-amai-primary/10 to-orange-500/10'
+    }
+  };
+
+  const categoryNames = {
+    apparels: 'Apparels',
+    accessories: 'Accessories',
+    memes: 'Meme Collection'
+  };
+
+  // Mock product data
+  const products: Product[] = [
+    {
+      id: `${brand}-${category}-1`,
+      name: brand === 'anil' ? 'Thala Premium T-Shirt' : 'Thalapathy Classic Tee',
+      price: 899,
+      image: sampleProductImage,
+      brand,
+      category: category || 'apparels',
+      description: `Premium quality ${categoryNames[category as keyof typeof categoryNames]} for ${brandConfig[brand].name} fans`
+    },
+    {
+      id: `${brand}-${category}-2`,
+      name: brand === 'anil' ? 'Ajith Fan Hoodie' : 'Vijay Fan Hoodie',
+      price: 1599,
+      image: sampleProductImage,
+      brand,
+      category: category || 'apparels',
+      description: 'Comfortable and stylish hoodie for true fans'
+    },
+    {
+      id: `${brand}-${category}-3`,
+      name: brand === 'anil' ? 'Thala Cap' : 'Thalapathy Cap',
+      price: 599,
+      image: sampleProductImage,
+      brand,
+      category: category || 'apparels',
+      description: 'Show your support with this premium cap'
+    },
+    {
+      id: `${brand}-${category}-4`,
+      name: brand === 'anil' ? 'Ultimate Fan Phone Cover' : 'Leo Phone Cover',
+      price: 399,
+      image: sampleProductImage,
+      brand,
+      category: category || 'accessories',
+      description: 'Protect your phone in style'
+    },
+    {
+      id: `${brand}-${category}-5`,
+      name: brand === 'anil' ? 'Thala Coffee Mug' : 'Thalapathy Coffee Mug',
+      price: 499,
+      image: sampleProductImage,
+      brand,
+      category: category || 'accessories',
+      description: 'Start your day with your favorite star'
+    },
+    {
+      id: `${brand}-${category}-6`,
+      name: brand === 'anil' ? '"Vinayagar" Quote Tee' : '"Vaathi Coming" Tee',
+      price: 799,
+      image: sampleProductImage,
+      brand,
+      category: category || 'memes',
+      description: 'Iconic dialogue on premium fabric'
+    }
+  ];
+
+  const handleAddToCart = (product: Product) => {
+    dispatch({ type: 'ADD_ITEM', payload: product });
+    toast({
+      title: 'Added to cart!',
+      description: `${product.name} has been added to your cart.`,
+    });
+  };
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className={`py-16 bg-gradient-to-br ${brandConfig[brand].gradient}`}>
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <Badge variant="outline" className="mb-4 text-lg px-4 py-2">
+              {brandConfig[brand].name} Collection
+            </Badge>
+            <h1 className="heading-section mb-4">
+              {categoryNames[category as keyof typeof categoryNames]}
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto modern-text">
+              Discover our exclusive {categoryNames[category as keyof typeof categoryNames].toLowerCase()} 
+              collection designed for {brandConfig[brand].name} fans
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Grid */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {products.map((product, index) => (
+              <div
+                key={product.id}
+                className="product-card group animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="aspect-[3/4] bg-muted/30 rounded-xl mb-4 overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <h3 className="font-semibold text-lg leading-tight modern-text">
+                    {product.name}
+                  </h3>
+                  
+                  <p className="text-sm text-muted-foreground modern-text">
+                    {product.description}
+                  </p>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-1">
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <span className="text-sm text-muted-foreground ml-1">
+                        (4.9)
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-2">
+                    <span className="text-2xl font-bold">
+                      ₹{product.price}
+                    </span>
+                    <Button
+                      onClick={() => handleAddToCart(product)}
+                      className={brand === 'anil' ? 'btn-anil' : 'btn-amai'}
+                      size="sm"
+                    >
+                      <ShoppingCart className="h-4 w-4 mr-2" />
+                      Add to Cart
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+};
+
+export default CategoryPage;
