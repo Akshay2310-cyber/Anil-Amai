@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage";
 import AnilStore from "./pages/AnilStore";
 import AmaiStore from "./pages/AmaiStore";
 import CategoryPage from "./pages/CategoryPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 import CartPage from "./pages/CartPage";
 import NotFound from "./pages/NotFound";
 
@@ -31,6 +32,8 @@ const App = () => (
                 <Route path="/amai" element={<AmaiStore />} />
                 <Route path="/anil/:category" element={<CategoryPage brand="anil" />} />
                 <Route path="/amai/:category" element={<CategoryPage brand="amai" />} />
+                <Route path="/anil/:category/:productId" element={<ProductDetailPage brand="anil" />} />
+                <Route path="/amai/:category/:productId" element={<ProductDetailPage brand="amai" />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

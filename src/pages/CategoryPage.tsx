@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
-import { ShoppingCart, Star } from 'lucide-react';
+import { useParams, Link } from 'react-router-dom';
+import { ShoppingCart, Star, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCart, type Product } from '@/contexts/CartContext';
@@ -128,15 +128,24 @@ const CategoryPage = ({ brand }: CategoryPageProps) => {
             {products.map((product, index) => (
               <div
                 key={product.id}
-                className="product-card group animate-fade-in"
+                className="product-card group animate-fade-in relative"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="aspect-[3/4] bg-muted/30 rounded-xl mb-4 overflow-hidden">
+                <div className="aspect-[3/4] bg-muted/30 rounded-xl mb-4 overflow-hidden relative">
                   <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <Link
+                      to={`/${brand}/${category}/${product.id}`}
+                      className="bg-white/90 backdrop-blur-sm text-foreground px-4 py-2 rounded-xl font-medium hover:bg-white transition-colors flex items-center space-x-2"
+                    >
+                      <Eye className="h-4 w-4" />
+                      <span>Quick View</span>
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="space-y-3">
@@ -165,14 +174,21 @@ const CategoryPage = ({ brand }: CategoryPageProps) => {
                     <span className="text-2xl font-bold">
                       ₹{product.price}
                     </span>
-                    <Button
-                      onClick={() => handleAddToCart(product)}
-                      className={brand === 'anil' ? 'btn-anil' : 'btn-amai'}
-                      size="sm"
-                    >
-                      <ShoppingCart className="h-4 w-4 mr-2" />
-                      Add to Cart
-                    </Button>
+                    <div className="flex space-x-2">
+                      <Link to={`/${brand}/${category}/${product.id}`}>
+                        <Button variant="outline" size="sm">
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                      </Link>
+                      <Button
+                        onClick={() => handleAddToCart(product)}
+                        className={brand === 'anil' ? 'btn-anil' : 'btn-amai'}
+                        size="sm"
+                      >
+                        <ShoppingCart className="h-4 w-4 mr-2" />
+                        Add
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
