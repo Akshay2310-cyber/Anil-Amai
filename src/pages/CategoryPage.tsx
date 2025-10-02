@@ -5,7 +5,10 @@ import { Badge } from '@/components/ui/badge';
 import { useCart, type Product } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { Footer } from '@/components/Footer';
-import sampleProductImage from '@/assets/sample-product.jpg';
+import tshirtAnil1 from '@/assets/tshirt-anil-1.jpg';
+import tshirtAnil2 from '@/assets/tshirt-anil-2.jpg';
+import tshirtAmai1 from '@/assets/tshirt-amai-1.jpg';
+import tshirtAmai2 from '@/assets/tshirt-amai-2.jpg';
 
 interface CategoryPageProps {
   brand: 'anil' | 'amai';
@@ -39,57 +42,57 @@ const CategoryPage = ({ brand }: CategoryPageProps) => {
   const products: Product[] = [
     {
       id: `${brand}-${category}-1`,
-      name: brand === 'anil' ? 'Thala Premium T-Shirt' : 'Thalapathy Classic Tee',
+      name: brand === 'anil' ? 'Thala Premium Tee' : 'Thalapathy Classic Tee',
       price: 899,
-      image: sampleProductImage,
+      image: brand === 'anil' ? tshirtAnil1 : tshirtAmai1,
       brand,
       category: category || 'apparels',
-      description: `Premium quality ${categoryNames[category as keyof typeof categoryNames]} for ${brandConfig[brand].name} fans`
+      description: 'Minimalist aesthetic design for true fans'
     },
     {
       id: `${brand}-${category}-2`,
-      name: brand === 'anil' ? 'Ajith Fan Hoodie' : 'Vijay Fan Hoodie',
-      price: 1599,
-      image: sampleProductImage,
+      name: brand === 'anil' ? 'Thala Signature Tee' : 'Thalapathy Premium Tee',
+      price: 1099,
+      image: brand === 'anil' ? tshirtAnil2 : tshirtAmai2,
       brand,
       category: category || 'apparels',
-      description: 'Comfortable and stylish hoodie for true fans'
+      description: 'Simple & elegant premium cotton'
     },
     {
       id: `${brand}-${category}-3`,
-      name: brand === 'anil' ? 'Thala Cap' : 'Thalapathy Cap',
-      price: 599,
-      image: sampleProductImage,
+      name: brand === 'anil' ? 'Thala Classic Tee' : 'Thalapathy Essential Tee',
+      price: 799,
+      image: brand === 'anil' ? tshirtAnil1 : tshirtAmai1,
       brand,
       category: category || 'apparels',
-      description: 'Show your support with this premium cap'
+      description: 'Timeless design for everyday wear'
     },
     {
       id: `${brand}-${category}-4`,
-      name: brand === 'anil' ? 'Ultimate Fan Phone Cover' : 'Leo Phone Cover',
-      price: 399,
-      image: sampleProductImage,
+      name: brand === 'anil' ? 'Thala Limited Edition' : 'Thalapathy Special Edition',
+      price: 1299,
+      image: brand === 'anil' ? tshirtAnil2 : tshirtAmai2,
       brand,
-      category: category || 'accessories',
-      description: 'Protect your phone in style'
+      category: category || 'apparels',
+      description: 'Exclusive limited collection piece'
     },
     {
       id: `${brand}-${category}-5`,
-      name: brand === 'anil' ? 'Thala Coffee Mug' : 'Thalapathy Coffee Mug',
-      price: 499,
-      image: sampleProductImage,
+      name: brand === 'anil' ? 'Thala Comfort Tee' : 'Thalapathy Comfort Tee',
+      price: 899,
+      image: brand === 'anil' ? tshirtAnil1 : tshirtAmai1,
       brand,
-      category: category || 'accessories',
-      description: 'Start your day with your favorite star'
+      category: category || 'apparels',
+      description: 'Soft premium fabric for all-day comfort'
     },
     {
       id: `${brand}-${category}-6`,
-      name: brand === 'anil' ? '"Vinayagar" Quote Tee' : '"Vaathi Coming" Tee',
-      price: 799,
-      image: sampleProductImage,
+      name: brand === 'anil' ? 'Thala Essential Tee' : 'Thalapathy Core Tee',
+      price: 749,
+      image: brand === 'anil' ? tshirtAnil2 : tshirtAmai2,
       brand,
-      category: category || 'memes',
-      description: 'Iconic dialogue on premium fabric'
+      category: category || 'apparels',
+      description: 'Clean aesthetic for loyal supporters'
     }
   ];
 

@@ -7,7 +7,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useCart, type Product } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { Footer } from '@/components/Footer';
-import sampleProductImage from '@/assets/sample-product.jpg';
+import tshirtAnil1 from '@/assets/tshirt-anil-1.jpg';
+import tshirtAnil2 from '@/assets/tshirt-anil-2.jpg';
+import tshirtAmai1 from '@/assets/tshirt-amai-1.jpg';
+import tshirtAmai2 from '@/assets/tshirt-amai-2.jpg';
 
 interface ProductDetailPageProps {
   brand: 'anil' | 'amai';
@@ -38,21 +41,18 @@ const ProductDetailPage = ({ brand }: ProductDetailPageProps) => {
   };
 
   // Mock product data with multiple images
-  const productImages = [
-    sampleProductImage,
-    sampleProductImage, // In real app, these would be different images
-    sampleProductImage,
-    sampleProductImage
-  ];
+  const productImages = brand === 'anil' 
+    ? [tshirtAnil1, tshirtAnil2, tshirtAnil1, tshirtAnil2]
+    : [tshirtAmai1, tshirtAmai2, tshirtAmai1, tshirtAmai2];
 
   const product: Product = {
     id: productId || `${brand}-${category}-1`,
-    name: brand === 'anil' ? 'Thala Premium T-Shirt' : 'Thalapathy Classic Tee',
+    name: brand === 'anil' ? 'Thala Premium Tee' : 'Thalapathy Classic Tee',
     price: 899,
-    image: sampleProductImage,
+    image: brand === 'anil' ? tshirtAnil1 : tshirtAmai1,
     brand,
     category: category || 'apparels',
-    description: `Premium quality ${category} designed exclusively for ${brandConfig[brand].name} fans. Made with 100% premium cotton for ultimate comfort and durability.`
+    description: `Premium quality minimalist design exclusively for ${brandConfig[brand].name} fans. Made with 100% premium cotton for ultimate comfort and durability.`
   };
 
   const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];

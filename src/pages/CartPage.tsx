@@ -96,9 +96,9 @@ const CartPage = () => {
           )}
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
-          <div className="xl:col-span-3 space-y-6">
+          <div className="lg:col-span-2 space-y-6">
             {state.items.map((item, index) => (
               <Card key={item.id} className="product-card card-hover-lift animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                 <CardContent className="p-8">
@@ -181,43 +181,60 @@ const CartPage = () => {
           </div>
 
           {/* Order Summary */}
-          <div className="xl:col-span-1">
+          <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
               <Card className="product-card">
-                <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold mb-6 modern-text">Order Summary</h2>
+                <CardContent className="p-6">
+                  <h2 className="text-xl font-bold mb-6 modern-text">Order Summary</h2>
                   
-                  <div className="space-y-4 mb-8">
-                    <div className="flex justify-between text-lg">
-                      <span className="modern-text">Subtotal ({state.itemCount} items)</span>
-                      <span className="font-semibold">₹{state.total.toLocaleString()}</span>
+                  <div className="space-y-3 mb-6 pb-6 border-b border-border">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Subtotal ({state.itemCount} items)</span>
+                      <span className="font-medium">₹{state.total.toLocaleString()}</span>
                     </div>
-                    <div className="flex justify-between text-lg">
-                      <span className="modern-text">Shipping</span>
-                      <div className="text-right">
-                        <span className="text-green-600 font-semibold">Free</span>
-                        <p className="text-xs text-muted-foreground">On orders above ₹500</p>
-                      </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Shipping</span>
+                      <span className="text-green-600 font-medium">Free</span>
                     </div>
-                    <div className="flex justify-between text-lg">
-                      <span className="modern-text">Tax (GST 18%)</span>
-                      <span className="font-semibold">₹{Math.round(state.total * 0.18).toLocaleString()}</span>
-                    </div>
-                    <hr className="my-4 border-muted" />
-                    <div className="flex justify-between text-2xl font-black">
-                      <span>Total</span>
-                      <span>₹{Math.round(state.total * 1.18).toLocaleString()}</span>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Tax (GST 18%)</span>
+                      <span className="font-medium">₹{Math.round(state.total * 0.18).toLocaleString()}</span>
                     </div>
                   </div>
 
-                  <div className="space-y-4">
-                    <Button className="w-full btn-anil h-14 text-lg btn-pulse">
-                      <CreditCard className="h-5 w-5 mr-3" />
-                      Proceed to Checkout
+                  <div className="flex justify-between text-lg font-bold mb-6">
+                    <span>Total</span>
+                    <span>₹{Math.round(state.total * 1.18).toLocaleString()}</span>
+                  </div>
+
+                  <div className="space-y-4 mb-6">
+                    <p className="text-sm font-semibold text-muted-foreground">Select Payment Method</p>
+                    <div className="space-y-2">
+                      <Button variant="outline" className="w-full justify-start h-12 hover:border-primary">
+                        <svg className="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="none">
+                          <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="2"/>
+                          <path d="M2 10h20" stroke="currentColor" strokeWidth="2"/>
+                        </svg>
+                        UPI Payment
+                      </Button>
+                      <Button variant="outline" className="w-full justify-start h-12 hover:border-primary">
+                        <CreditCard className="h-5 w-5 mr-3" />
+                        Card Payment
+                      </Button>
+                      <Button variant="outline" className="w-full justify-start h-12 hover:border-primary">
+                        <Package className="h-5 w-5 mr-3" />
+                        Cash on Delivery
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <Button className="w-full btn-anil h-12 text-base btn-pulse">
+                      Proceed to Payment
                     </Button>
                     
                     <div className="text-center">
-                      <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors modern-text">
+                      <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors modern-text">
                         <ArrowLeft className="h-4 w-4 inline mr-2" />
                         Continue Shopping
                       </Link>

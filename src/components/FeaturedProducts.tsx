@@ -4,7 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCart, type Product } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
-import sampleProductImage from '@/assets/sample-product.jpg';
+import tshirtAnil1 from '@/assets/tshirt-anil-1.jpg';
+import tshirtAmai1 from '@/assets/tshirt-amai-1.jpg';
+import tshirtAnil2 from '@/assets/tshirt-anil-2.jpg';
 
 export const FeaturedProducts = () => {
   const { dispatch } = useCart();
@@ -13,30 +15,30 @@ export const FeaturedProducts = () => {
   const featuredProducts: Product[] = [
     {
       id: 'featured-1',
-      name: 'Thala 7 Limited Edition Tee',
+      name: 'Thala 7 Premium Tee',
       price: 1299,
-      image: sampleProductImage,
+      image: tshirtAnil1,
       brand: 'anil',
       category: 'apparels',
-      description: 'Exclusive design celebrating Thala\'s legacy'
+      description: 'Minimalist design for true fans'
     },
     {
       id: 'featured-2',
-      name: 'Thalapathy Leo Hoodie',
-      price: 1899,
-      image: sampleProductImage,
+      name: 'Thalapathy Classic Tee',
+      price: 1199,
+      image: tshirtAmai1,
       brand: 'amai',
       category: 'apparels',
-      description: 'Premium Leo movie inspired hoodie'
+      description: 'Simple & elegant fan favorite'
     },
     {
       id: 'featured-3',
-      name: 'Ajith VS Vijay Combo Pack',
-      price: 2499,
-      image: sampleProductImage,
+      name: 'Thala Signature Tee',
+      price: 1399,
+      image: tshirtAnil2,
       brand: 'anil',
-      category: 'memes',
-      description: 'Best of both worlds collection'
+      category: 'apparels',
+      description: 'Premium quality cotton tee'
     }
   ];
 

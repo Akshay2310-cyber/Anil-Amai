@@ -25,8 +25,7 @@ const HomePage = () => {
             <div className="heading-hero text-white mb-6 animate-fade-in drop-shadow-2xl">
               Anil
             </div>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 font-light drop-shadow-lg modern-text"
-            >
+            <p className="text-xl md:text-2xl text-white/90 mb-8 font-light drop-shadow-lg modern-text">
               For the Ultimate Thala Fans
             </p>
             <div className="flex items-center justify-center space-x-2 text-white/80 group-hover:text-white transition-colors">
