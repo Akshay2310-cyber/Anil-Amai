@@ -2,6 +2,13 @@ import { Link } from 'react-router-dom';
 import { Heart, Mail, Phone, MapPin, Send, Users, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+import { SubscriptionForm } from '@/components/SubscriptionForm';
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 // Social media icons (using simple SVGs for better customization)
 const XIcon = () => (
@@ -29,6 +36,8 @@ const RedditIcon = () => (
 );
 
 export const Footer = () => {
+  const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
+
   return (
     <footer className="bg-background border-t border-border/40">
       {/* Newsletter Section */}
@@ -38,16 +47,17 @@ export const Footer = () => {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto modern-text">
             Get the latest updates on new collections, exclusive drops, and fan community events
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input 
-              placeholder="Enter your email" 
-              className="flex-1 h-12 modern-text"
-            />
-            <Button className="btn-anil h-12 px-8">
-              <Send className="h-4 w-4 mr-2" />
-              Subscribe
-            </Button>
-          </div>
+          <Dialog open={isSubscriptionOpen} onOpenChange={setIsSubscriptionOpen}>
+            <DialogTrigger asChild>
+              <Button className="btn-anil h-12 px-8">
+                <Send className="h-4 w-4 mr-2" />
+                Subscribe to Newsletter
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md">
+              <SubscriptionForm onClose={() => setIsSubscriptionOpen(false)} />
+            </DialogContent>
+          </Dialog>
         </div>
       </section>
 

@@ -1,14 +1,27 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, Sun, Moon } from 'lucide-react';
+import { ShoppingCart, Sun, Moon, Heart, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { useWishlist } from '@/contexts/WishlistContext';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import { AuthModal } from '@/components/AuthModal';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 export const Header = () => {
   const { state } = useCart();
+  const { user, logout } = useAuth();
+  const { wishlist } = useWishlist();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,6 +74,21 @@ export const Header = () => {
             )}
           </Button>
 
+          {/* Wishlist */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate('/profile')}
+            className="relative h-9 w-9"
+          >
+            <Heart className="h-4 w-4" />
+            {wishlist.length > 0 && (
+              <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-xs font-bold text-white flex items-center justify-center">
+                {wishlist.length > 9 ? '9+' : wishlist.length}
+              </span>
+            )}
+          </Button>
+
           {/* Cart */}
           <Button
             variant="ghost"
@@ -75,8 +103,48 @@ export const Header = () => {
               </span>
             )}
           </Button>
+
+          {/* User Menu */}
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-9 w-9">
+                  <User className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => navigate('/profile')}>
+                  <User className="mr-2 h-4 w-4" />
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/profile')}>
+                  <Heart className="mr-2 h-4 w-4" />
+                  Wishlist ({wishlist.length})
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={logout}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsAuthModalOpen(true)}
+            >
+              Login
+            </Button>
+          )}
         </div>
       </div>
+      
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
     </header>
   );
 };

@@ -5,10 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { useCart, type Product } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { Footer } from '@/components/Footer';
-import tshirtAnil1 from '@/assets/tshirt-anil-1.jpg';
-import tshirtAnil2 from '@/assets/tshirt-anil-2.jpg';
-import tshirtAmai1 from '@/assets/tshirt-amai-1.jpg';
-import tshirtAmai2 from '@/assets/tshirt-amai-2.jpg';
+import tshirtImage from '@/assets/tshirt.png';
 
 interface CategoryPageProps {
   brand: 'anil' | 'amai';
@@ -44,7 +41,7 @@ const CategoryPage = ({ brand }: CategoryPageProps) => {
       id: `${brand}-${category}-1`,
       name: brand === 'anil' ? 'Thala Premium Tee' : 'Thalapathy Classic Tee',
       price: 899,
-      image: brand === 'anil' ? tshirtAnil1 : tshirtAmai1,
+      image: tshirtImage,
       brand,
       category: category || 'apparels',
       description: 'Minimalist aesthetic design for true fans'
@@ -53,7 +50,7 @@ const CategoryPage = ({ brand }: CategoryPageProps) => {
       id: `${brand}-${category}-2`,
       name: brand === 'anil' ? 'Thala Signature Tee' : 'Thalapathy Premium Tee',
       price: 1099,
-      image: brand === 'anil' ? tshirtAnil2 : tshirtAmai2,
+      image: tshirtImage,
       brand,
       category: category || 'apparels',
       description: 'Simple & elegant premium cotton'
@@ -62,7 +59,7 @@ const CategoryPage = ({ brand }: CategoryPageProps) => {
       id: `${brand}-${category}-3`,
       name: brand === 'anil' ? 'Thala Classic Tee' : 'Thalapathy Essential Tee',
       price: 799,
-      image: brand === 'anil' ? tshirtAnil1 : tshirtAmai1,
+      image: tshirtImage,
       brand,
       category: category || 'apparels',
       description: 'Timeless design for everyday wear'
@@ -71,7 +68,7 @@ const CategoryPage = ({ brand }: CategoryPageProps) => {
       id: `${brand}-${category}-4`,
       name: brand === 'anil' ? 'Thala Limited Edition' : 'Thalapathy Special Edition',
       price: 1299,
-      image: brand === 'anil' ? tshirtAnil2 : tshirtAmai2,
+      image: tshirtImage,
       brand,
       category: category || 'apparels',
       description: 'Exclusive limited collection piece'
@@ -80,7 +77,7 @@ const CategoryPage = ({ brand }: CategoryPageProps) => {
       id: `${brand}-${category}-5`,
       name: brand === 'anil' ? 'Thala Comfort Tee' : 'Thalapathy Comfort Tee',
       price: 899,
-      image: brand === 'anil' ? tshirtAnil1 : tshirtAmai1,
+      image: tshirtImage,
       brand,
       category: category || 'apparels',
       description: 'Soft premium fabric for all-day comfort'
@@ -89,7 +86,7 @@ const CategoryPage = ({ brand }: CategoryPageProps) => {
       id: `${brand}-${category}-6`,
       name: brand === 'anil' ? 'Thala Essential Tee' : 'Thalapathy Core Tee',
       price: 749,
-      image: brand === 'anil' ? tshirtAnil2 : tshirtAmai2,
+      image: tshirtImage,
       brand,
       category: category || 'apparels',
       description: 'Clean aesthetic for loyal supporters'

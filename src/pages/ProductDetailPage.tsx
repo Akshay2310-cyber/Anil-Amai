@@ -7,10 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useCart, type Product } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { Footer } from '@/components/Footer';
-import tshirtAnil1 from '@/assets/tshirt-anil-1.jpg';
-import tshirtAnil2 from '@/assets/tshirt-anil-2.jpg';
-import tshirtAmai1 from '@/assets/tshirt-amai-1.jpg';
-import tshirtAmai2 from '@/assets/tshirt-amai-2.jpg';
+import tshirtImage from '@/assets/tshirt.png';
 
 interface ProductDetailPageProps {
   brand: 'anil' | 'amai';
@@ -41,15 +38,13 @@ const ProductDetailPage = ({ brand }: ProductDetailPageProps) => {
   };
 
   // Mock product data with multiple images
-  const productImages = brand === 'anil' 
-    ? [tshirtAnil1, tshirtAnil2, tshirtAnil1, tshirtAnil2]
-    : [tshirtAmai1, tshirtAmai2, tshirtAmai1, tshirtAmai2];
+  const productImages = [tshirtImage, tshirtImage, tshirtImage, tshirtImage];
 
   const product: Product = {
     id: productId || `${brand}-${category}-1`,
     name: brand === 'anil' ? 'Thala Premium Tee' : 'Thalapathy Classic Tee',
     price: 899,
-    image: brand === 'anil' ? tshirtAnil1 : tshirtAmai1,
+    image: tshirtImage,
     brand,
     category: category || 'apparels',
     description: `Premium quality minimalist design exclusively for ${brandConfig[brand].name} fans. Made with 100% premium cotton for ultimate comfort and durability.`

@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Star, Flame, TrendingUp } from 'lucide-react';
+import { ShoppingCart, Star, Flame, TrendingUp, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCart, type Product } from '@/contexts/CartContext';
+import { useWishlist } from '@/contexts/WishlistContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import tshirtAnil1 from '@/assets/tshirt-anil-1.jpg';
-import tshirtAmai1 from '@/assets/tshirt-amai-1.jpg';
-import tshirtAnil2 from '@/assets/tshirt-anil-2.jpg';
+import tshirtImage from '@/assets/tshirt.png';
 
 export const FeaturedProducts = () => {
   const { dispatch } = useCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const { isAuthenticated } = useAuth();
   const { toast } = useToast();
 
   const featuredProducts: Product[] = [
@@ -17,7 +19,7 @@ export const FeaturedProducts = () => {
       id: 'featured-1',
       name: 'Thala 7 Premium Tee',
       price: 1299,
-      image: tshirtAnil1,
+      image: tshirtImage,
       brand: 'anil',
       category: 'apparels',
       description: 'Minimalist design for true fans'
@@ -26,7 +28,7 @@ export const FeaturedProducts = () => {
       id: 'featured-2',
       name: 'Thalapathy Classic Tee',
       price: 1199,
-      image: tshirtAmai1,
+      image: tshirtImage,
       brand: 'amai',
       category: 'apparels',
       description: 'Simple & elegant fan favorite'
@@ -35,7 +37,7 @@ export const FeaturedProducts = () => {
       id: 'featured-3',
       name: 'Thala Signature Tee',
       price: 1399,
-      image: tshirtAnil2,
+      image: tshirtImage,
       brand: 'anil',
       category: 'apparels',
       description: 'Premium quality cotton tee'
@@ -48,6 +50,35 @@ export const FeaturedProducts = () => {
       title: 'Added to cart!',
       description: `${product.name} has been added to your cart.`,
     });
+  };
+
+  const handleWishlistToggle = async (product: Product) => {
+    if (!isAuthenticated) {
+      toast({
+        title: 'Please log in',
+        description: 'You need to be logged in to add items to your wishlist.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (isInWishlist(product.id)) {
+      const success = await removeFromWishlist(product.id);
+      if (success) {
+        toast({
+          title: 'Removed from wishlist',
+          description: `${product.name} has been removed from your wishlist.`,
+        });
+      }
+    } else {
+      const success = await addToWishlist(product);
+      if (success) {
+        toast({
+          title: 'Added to wishlist',
+          description: `${product.name} has been added to your wishlist.`,
+        });
+      }
+    }
   };
 
   return (
@@ -108,14 +139,28 @@ export const FeaturedProducts = () => {
                       ₹{Math.round(product.price * 1.3)}
                     </span>
                   </div>
-                  <Button
-                    onClick={() => handleAddToCart(product)}
-                    className={product.brand === 'anil' ? 'btn-anil' : 'btn-amai'}
-                    size="sm"
-                  >
-                    <ShoppingCart className="h-4 w-4 mr-2" />
-                    Add to Cart
-                  </Button>
+                  <div className="flex items-center space-x-2">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => handleWishlistToggle(product)}
+                      className={`h-9 w-9 ${
+                        isInWishlist(product.id) 
+                          ? 'text-red-500 border-red-500 hover:bg-red-50' 
+                          : 'hover:text-red-500'
+                      }`}
+                    >
+                      <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-current' : ''}`} />
+                    </Button>
+                    <Button
+                      onClick={() => handleAddToCart(product)}
+                      className={product.brand === 'anil' ? 'btn-anil' : 'btn-amai'}
+                      size="sm"
+                    >
+                      <ShoppingCart className="h-4 w-4 mr-2" />
+                      Add to Cart
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
