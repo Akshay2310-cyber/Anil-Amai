@@ -3,8 +3,8 @@ import { ArrowRight, Star, Users } from 'lucide-react';
 import { InteractiveStats } from '@/components/InteractiveStats';
 import { FeaturedProducts } from '@/components/FeaturedProducts';
 import { Footer } from '@/components/Footer';
-import anilHeroImage from '@/assets/anil-hero.jpg';
-import amaiHeroImage from '@/assets/amai-hero.jpg';
+import anilHeroImage from '@/assets/anil-hero.gif';
+import amaiHeroImage from '@/assets/amai-hero.gif';
 
 const HomePage = () => {
   return (
@@ -26,7 +26,7 @@ const HomePage = () => {
               Anil
             </div>
             <p className="text-xl md:text-2xl text-white/90 mb-8 font-light drop-shadow-lg modern-text">
-              For the Ultimate Thala Fans
+            For the Devoted Thalapathy Fans 
             </p>
             <div className="flex items-center justify-center space-x-2 text-white/80 group-hover:text-white transition-colors">
               <span className="font-medium modern-text">Explore Collection</span>
@@ -60,7 +60,7 @@ const HomePage = () => {
               Amai
             </div>
             <p className="text-xl md:text-2xl text-white/90 mb-8 font-light drop-shadow-lg modern-text">
-              For the Devoted Thalapathy Fans
+              For the Ultimate Thala Fans
             </p>
             <div className="flex items-center justify-center space-x-2 text-white/80 group-hover:text-white transition-colors">
               <span className="font-medium modern-text">Explore Collection</span>
